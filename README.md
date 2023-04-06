@@ -1,2 +1,2 @@
 # Namaste-React
-React projects
+React project from scratch
