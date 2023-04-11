@@ -2,28 +2,40 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", { id: "heading2" }, "This is Namaste React 🚀"),
-    React.createElement("h2", { id: "heading3" }, "I am H2 tag!"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", { id: "heading4" }, "I am H1 tag!"),
-    React.createElement("h2", { id: "heading5" }, "I am H2 tag!"),
-  ]),
-]);
-console.log(parent);
-// nested html structure
+// React Elements
 
-// starting with heading
-const heading = React.createElement(
-  "h1",
-  { id: "heading1", xyz: "abc" },
-  "Hello World from React!"
+const Title = () => (
+  <h1 className="head" tabIndex={5}>
+    Title using FC 🚀
+  </h1>
 );
-//console.log(heading); //object
-//starting with heading
+
+const elem = <span>React Element</span>;
+
+// React Functional Component
+const HeadingComponent = () => {
+  return (
+    <>
+      <div id="container">
+        <h1>Namaste React FC 🚀🚀</h1>
+        {<Title />}
+        {title}
+      </div>
+      <div id="container2">
+        <h1>Namaste React FC 🚀🚀</h1>
+        {<Title />}
+        {title}
+      </div>
+    </>
+  );
+};
+
+const title = (
+  <h1 className="head" tabIndex={5}>
+    {elem} title using JSX 🚀
+  </h1>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(parent);
+root.render(<HeadingComponent />);
