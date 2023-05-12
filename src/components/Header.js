@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
 export const Header = () => {
+  const [isLoggedIn , setIsLoggedIn] = useState(false)
+
+  const loggedInUser = () =>{
+    // api call to authenticate
+    setIsLoggedIn((isLoggedIn) => !isLoggedIn)
+  }
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -19,6 +26,9 @@ export const Header = () => {
           <li>Cart</li>
         </ul>
       </div>
+      {
+        (isLoggedIn ? <button onClick={loggedInUser}>Logout</button> : <button onClick={loggedInUser}>Login</button>)
+      }
     </div>
   );
 };

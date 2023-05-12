@@ -29,17 +29,17 @@
 
 .res-card {
   margin: 5px;
-  width: 200px;
+  width: 250px;
   height: 300px;
   padding: 20px 20px 57px;
   border: 1px solid #fff;
   contain: content;
 }
 
-.res-card:hover{
+.res-card:hover {
   cursor: pointer;
   border-color: #d3d5df;
-  box-shadow: 0 4px 7px 0 rgba(218,220,230,.6);
+  box-shadow: 0 4px 7px 0 rgba(218, 220, 230, 0.6);
 }
 
 .res-logo {
@@ -47,6 +47,33 @@
   height: 130px;
 }
 
-.search {
+.search-input {
+  padding: 10px 5px;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.search-btn {
   padding: 10px;
+}
+
+.filter-btn {
+  padding: 10px;
+}
+
+.shimmer-div {
+  display: flex;
+}
+
+.shimmer-card {
+  margin: 5px;
+  padding: 20px 20px 57px;
 }
