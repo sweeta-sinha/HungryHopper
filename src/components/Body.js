@@ -72,7 +72,7 @@ const Body = () => {
     </div>
   ) : (
     <div className="shimmer-container">
-    {[1, 2, 3, 4 , 5, 6,7,8].map((item) => <ShimmerUI key={item} />)}
+    {Array(18).fill("").map((item , index) => <ShimmerUI key={index} />)}
     </div>
   );
   
