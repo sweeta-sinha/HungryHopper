@@ -1,9 +1,15 @@
 import React from 'react'
-import { Shimmer , Image } from "react-shimmer";
 
 const ShimmerUI = () => {
   return (
-   <Shimmer className='shimmer-card' width={250} height={300} />
+   <div className='shimmer-card'>
+    <div className='shimmer-image shimmer-shine'></div>
+    <div className='shimmer-div-name shimmer-shine'></div>
+    <div className='shimmer-div-name shimmer-shine'></div>
+    <div className='shimmer-div-rating shimmer-shine'></div>
+    <div className='shimmer-div-rating shimmer-shine'></div>
+    <div className='shimmer-div-rating shimmer-shine'></div>
+   </div>
   )
 }
 
