@@ -12,6 +12,7 @@ const RestaurantMenu = () => {
     getRestaurantInfo();
   }, []);
 
+
   async function getRestaurantInfo() {
     const data = await fetch(
       `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.022505&lng=72.5713621&restaurantId=${resId}&submitAction=ENTER`
@@ -23,8 +24,43 @@ const RestaurantMenu = () => {
     setRestaurantMenu(menuData?.slice(1, menuData.length));
   }
 
+  const handleRestaurantMenuRender = (menuItems) => {
+    if (menuItems?.card?.card?.categories?.length) {
+      return (
+        <div>
+          <h3>{menuItems?.card?.card?.title}</h3>
+          {menuItems.card.card.categories.map((category) => (
+            <>
+              <h4>{category?.title}</h4>
+              {category?.itemCards?.length ? (
+                category.itemCards.map((item) => (
+                  <div>
+                    <p>{item?.card?.info?.name}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No item !</p>
+              )}
+            </>
+          ))}
+        </div>
+      );
+    } else if (menuItems?.card?.card?.itemCards?.length) {
+      return (
+        <div>
+          <h3>{menuItems?.card?.card?.title}</h3>
+          {menuItems.card.card.itemCards.map((item) => (
+            <p>{item?.card?.info?.name}</p>
+          ))}
+        </div>
+      );
+    } else {
+      return <p>No item !</p>;
+    }
+  };
+
   return (
-    <div>
+    <div className="restaurant-menu-container">
       {restaurant ? (
         <div>
           <h1>Restaurant id : {resId}</h1>
@@ -41,31 +77,16 @@ const RestaurantMenu = () => {
       ) : (
         <ShimmerUI />
       )}
-      <div>
-        <h1>Menu</h1>
+      <div className="restaurant-menu">
+        <div>
+          <h1>Menu</h1>
+        </div>
+        {restaurantMenu?.length ? (
+          <>{restaurantMenu.map((menu) => handleRestaurantMenuRender(menu))}</>
+        ) : (
+          <h2>No dishes found for this restaurant!</h2>
+        )}
       </div>
-      {restaurantMenu?.length ? (
-        <>
-          {restaurantMenu.map((menu) => (
-            <div>
-              <h3>{menu?.card?.card?.title}</h3>
-              {menu?.card?.card?.itemCards?.length ? (
-                <>
-                  {menu.card.card.itemCards.map((item) => (
-                    <div>
-                      <p>{item?.card?.info?.name}</p>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <p>No item !</p>
-              )}
-            </div>
-          ))}
-        </>
-      ) : (
-        <h2>No dishes found for this restaurant!</h2>
-      )}
     </div>
   );
 };

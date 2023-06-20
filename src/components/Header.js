@@ -23,15 +23,18 @@ export const Header = () => {
           <li>
             <Link to={"/about"}>About Us</Link>
           </li>
-          <li> <Link to={"/contact-us"}>Contact Us</Link></li>
+          <li>
+            {" "}
+            <Link to={"/contact-us"}>Contact Us</Link>
+          </li>
           <li>Cart</li>
+          {isLoggedIn ? (
+            <button onClick={loggedInUser}>Logout</button>
+          ) : (
+            <button onClick={loggedInUser}>Login</button>
+          )}
         </ul>
       </div>
-      {isLoggedIn ? (
-        <button onClick={loggedInUser}>Logout</button>
-      ) : (
-        <button onClick={loggedInUser}>Login</button>
-      )}
     </div>
   );
 };
