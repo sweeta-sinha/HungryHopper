@@ -3,6 +3,8 @@ import { restaurantData } from "../utils/mockData";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerUI from "./Shimmer";
 import { Link } from "react-router-dom";
+import { filterSearchedRestaurants } from "../utils/helper";
+import useIsOnline from './../utils/useIsOnline';
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -14,17 +16,6 @@ const Body = () => {
       (restaurant) => restaurant?.data?.avgRating > 4
     );
     setFilteredListOfRestaurant(topRatedRestaurants);
-  };
-
-  const filterSearchedRestaurants = () => {
-    const searchedRestaurants = searchText?.trim()
-      ? listOfRestaurant.filter((restaurant) =>
-          restaurant?.data?.name
-            ?.toLowerCase()
-            ?.includes(searchText.toLowerCase())
-        )
-      : listOfRestaurant;
-    setFilteredListOfRestaurant(searchedRestaurants);
   };
 
   useEffect(() => {
@@ -46,6 +37,9 @@ const Body = () => {
 
   if (!listOfRestaurant) return null;
 
+  let online = useIsOnline();
+  if(!online) return <h1>🔴 Offline, Please check your internet connection!!</h1>;
+
   return listOfRestaurant.length > 0 ? (
     <div className="body">
       <div className="filter">
@@ -57,7 +51,7 @@ const Body = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button onClick={filterSearchedRestaurants} className="search-btn">
+          <button onClick={() => setFilteredListOfRestaurant(filterSearchedRestaurants(searchText , listOfRestaurant))} className="search-btn">
             Search
           </button>
         </div>

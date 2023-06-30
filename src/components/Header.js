@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useLocalStorage from './../utils/useLocalStorage';
 
 export const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [setLocalStorageData , getLocalStorageData] = useLocalStorage();
 
   const loggedInUser = () => {
     // api call to authenticate
     setIsLoggedIn((isLoggedIn) => !isLoggedIn);
   };
+
 
   return (
     <div className="header">
@@ -26,6 +29,10 @@ export const Header = () => {
           <li>
             {" "}
             <Link to={"/contact-us"}>Contact Us</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to={"/instamart"}>Instamart</Link>
           </li>
           <li>Cart</li>
           {isLoggedIn ? (
