@@ -1,0 +1,1 @@
+export const FOOD_APP_LOGO = require("./assets/food-delivery-app-logo.png")

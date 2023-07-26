@@ -1,4 +1,4 @@
-# Namaste-React
+# Hungry Hopper - food ordering app
 React project from scratch
 
 # Parcel
