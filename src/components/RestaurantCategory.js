@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = ({ category }) => {
-  const [expandItemsList, setExpandItemsList] = useState(false);
-
-  const handleExpandItemsList = () => {
-    setExpandItemsList((expand) => !expand);
-  };
-
+const RestaurantCategory = ({
+  category,
+  expandItems,
+  handleExpandItemsList,
+}) => {
   return (
-    <div key={category?.title} className="w-full">
+    <div className="w-full">
       <div
         onClick={handleExpandItemsList}
         className="flex cursor-pointer justify-between w-full my-4 py-2"
@@ -17,7 +15,7 @@ const RestaurantCategory = ({ category }) => {
         <span>{`${category?.title} (${category?.itemCards?.length})`}</span>
         <span>🔽</span>
       </div>
-       {expandItemsList && <ItemList items={category?.itemCards} />}
+      {expandItems && <ItemList items={category?.itemCards} />}
       <div className="w-full p-2 bg-slate-100"></div>
     </div>
   );
