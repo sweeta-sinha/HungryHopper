@@ -25,8 +25,8 @@ const Body = () => {
     );
     const json = await data.json();
     //optional chaining
-    setListOfRestaurant(json?.data?.cards?.[2]?.data?.data?.cards);
-    setFilteredListOfRestaurant(json?.data?.cards?.[2]?.data?.data?.cards);
+    setListOfRestaurant(json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredListOfRestaurant(json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     console.log("get restaurant list called");
   }
 
@@ -77,7 +77,7 @@ const Body = () => {
       <div className="flex pl-4 sm:pl-12 pr-4 flex-wrap">
         {filteredListOfRestaurant?.length > 0 ? (
           filteredListOfRestaurant.map((resItem) => (
-            <Link key={resItem.data.id} to={`/restaurant/${resItem.data.id}`}>
+            <Link key={resItem.info.id} to={`/restaurant/${resItem?.info?.id}`}>
               {resItem.data?.promoted ? (
                 <RestaurantCardPromoted resData={resItem}/>
               ) : (
