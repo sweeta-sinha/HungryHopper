@@ -1,7 +1,7 @@
 // nested html structure
-import React, { lazy , Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter , RouterProvider , Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
 // import About from "./components/About";
@@ -11,6 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import ProfileFC from "./components/Profile";
 import AboutClass from "./components/AboutClass";
 import ShimmerUI from "./components/Shimmer";
+import { UserContextProvider } from "./utils/userContext";
 
 const Instamart = lazy(() => import("./components/Instamart"));
 
@@ -19,8 +20,10 @@ const About = lazy(() => import("./components/About"));
 const AppLayout = () => {
   return (
     <div className="app">
-      <Header />
-      <Outlet />
+      <UserContextProvider>
+        <Header />
+        <Outlet />
+      </UserContextProvider>
     </div>
   );
 };
@@ -28,21 +31,25 @@ const AppLayout = () => {
 const appRouter = createBrowserRouter([
   {
     element: <AppLayout />,
-    errorElement : <Error />,
-    children:[
+    errorElement: <Error />,
+    children: [
       {
         path: "/about",
-        element: <Suspense><About /></Suspense>,
-        children:[
+        element: (
+          <Suspense>
+            <About />
+          </Suspense>
+        ),
+        children: [
           {
             path: "profile",
             element: <ProfileFC />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "/about-class",
-        element: <AboutClass />
+        element: <AboutClass />,
       },
       {
         path: "/contact-us",
@@ -58,10 +65,14 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/instamart",
-        element: <Suspense fallback={<ShimmerUI />}><Instamart /></Suspense>,
+        element: (
+          <Suspense fallback={<ShimmerUI />}>
+            <Instamart />
+          </Suspense>
+        ),
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

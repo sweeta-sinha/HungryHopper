@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { LOGO_URL } from "../utils/constants";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FOOD_APP_LOGO } from "../assets";
-import useLocalStorage from './../utils/useLocalStorage';
+import UserContext from "../utils/userContext";
 
 export const Header = () => {
-  // const [setLocalStorageData , getLocalStorageData] = useLocalStorage();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn , toggleLogin } = useContext(UserContext);
 
-  const loggedInUser = () => {
+  const logIn = () => {
     // api call to authenticate
-    setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+    toggleLogin("Sweeta")
   };
 
+  const logOut = () => {
+    // api call to authenticate
+    toggleLogin("Default User")
+  };
 
   return (
     <div className="flex justify-between items-start shadow-lg mb-4 md:max-xl:bg-blue-300 bg-pink-100">
@@ -37,9 +39,13 @@ export const Header = () => {
           </li>
           <li className="px-4 hover:text-sky-500">Cart</li>
           {isLoggedIn ? (
-            <button className="px-4 hover:text-sky-500" onClick={loggedInUser}>Logout</button>
+            <button className="px-4 hover:text-sky-500" onClick={logOut}>
+              Logout
+            </button>
           ) : (
-            <button className="px-4 hover:text-sky-500" onClick={loggedInUser}>Login</button>
+            <button className="px-4 hover:text-sky-500" onClick={logIn}>
+              Login
+            </button>
           )}
         </ul>
       </div>
