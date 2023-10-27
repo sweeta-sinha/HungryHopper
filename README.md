@@ -49,3 +49,17 @@ React project from scratch
  (Normal JS utility functions)
  - useState
  - useEffect
+
+
+ # 2 types of routing in web apps
+ - Client Side Routing
+ - Server Side Routing
+
+
+ # Redux Toolkit
+ - Install @reduxjs/toolkit and react-redux
+ - Build our store
+ - Connect store to app
+ - Slice
+ - dispatch action 
+ - Selector

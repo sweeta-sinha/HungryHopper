@@ -2,18 +2,20 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FOOD_APP_LOGO } from "../assets";
 import UserContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
-  const { isLoggedIn , toggleLogin } = useContext(UserContext);
+  const { isLoggedIn, toggleLogin, loggedInUser } = useContext(UserContext);
+  const cartItems = useSelector((store) => store.cart.items);
 
   const logIn = () => {
     // api call to authenticate
-    toggleLogin("Sweeta")
+    toggleLogin("Sweeta");
   };
 
   const logOut = () => {
     // api call to authenticate
-    toggleLogin("Default User")
+    toggleLogin("Default User");
   };
 
   return (
@@ -37,7 +39,9 @@ export const Header = () => {
             {" "}
             <Link to={"/instamart"}>Instamart</Link>
           </li>
-          <li className="px-4 hover:text-sky-500">Cart</li>
+          <li className="px-4 hover:text-sky-500 text-lg">
+            <Link to={"/cart"}>({cartItems.length}) Cart</Link>
+          </li>
           {isLoggedIn ? (
             <button className="px-4 hover:text-sky-500" onClick={logOut}>
               Logout
@@ -47,6 +51,9 @@ export const Header = () => {
               Login
             </button>
           )}
+          <li className="px-4 text-slate-900 font-extrabold">
+            Hi, {loggedInUser}
+          </li>
         </ul>
       </div>
     </div>

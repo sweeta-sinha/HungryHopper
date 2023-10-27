@@ -6,7 +6,13 @@ class AboutClass extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount(){
+    console.log("mounted")
+  }
   render() {
+  console.log("render")
+
     return (
       <div>
         <h1>This is the about section class !</h1>

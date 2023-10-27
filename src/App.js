@@ -12,6 +12,9 @@ import ProfileFC from "./components/Profile";
 import AboutClass from "./components/AboutClass";
 import ShimmerUI from "./components/Shimmer";
 import { UserContextProvider } from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/redux-store/appStore";
+import Cart from "./components/Cart";
 
 const Instamart = lazy(() => import("./components/Instamart"));
 
@@ -19,12 +22,14 @@ const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
   return (
-    <div className="app">
+    <Provider store={appStore}>
       <UserContextProvider>
-        <Header />
-        <Outlet />
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
       </UserContextProvider>
-    </div>
+    </Provider>
   );
 };
 
@@ -62,6 +67,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/instamart",
